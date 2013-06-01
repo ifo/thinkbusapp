@@ -1,9 +1,9 @@
 {
-  "name": "application-name",
+  "name": "thinkbus",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "coffee app.coffee"
   },
   "dependencies": {
     "express": "3.2.5",

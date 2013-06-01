@@ -1,5 +1,7 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  form(action='/sms', method='post')
+    input(type='text', name='PhoneID', value='2345551234')
+    input(type='text', name='OriginalText', value='THINKBUS 401 is late')
+    input(type='submit', value='Send this message!')
