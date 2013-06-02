@@ -2,4 +2,7 @@
 *.swp
 .env
 
+#logging
+textlog.txt
+
 node_modules

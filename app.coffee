@@ -4,6 +4,7 @@ Module dependencies.
 ###
 express = require("express")
 routes = require("./routes")
+sms = require("./routes/sms")
 http = require("http")
 path = require("path")
 app = express()
@@ -22,12 +23,17 @@ app.use express.static(path.join(__dirname, "public"))
 # development only
 app.use express.errorHandler()  if "development" is app.get("env")
 
-app.get "/", routes.index
+# sms section
+app.get "/", sms.index
+
+# sms watch
+app.get "/live", sms.live
+
 app.get "/sms", routes.sms
 app.post "/sms", routes.smsp
 
 # because the sms api is sent to /
-#app.get "/index", routes.index
+app.get "/test", routes.index
 
 # route shout section
 app.get "/rs/agencies", routes.getAgencies

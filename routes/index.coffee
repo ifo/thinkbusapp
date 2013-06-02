@@ -63,6 +63,7 @@ exports.nextbus = (req, res) ->
       if !nbusarray
         nbusarray = body.response
       times = (bus.arrival_time for bus in nbusarray)
+      buses = (bus.route_short_name for bus in nbusarray)
       nbus = JSON.stringify nbusarray
       #times = JSON.stringify times
       times = times.reduce (x, y) -> x + ", " + y
@@ -72,3 +73,4 @@ exports.nextbus = (req, res) ->
         title: "Next Bus"
         nextbus: nbus
         times: times
+        buses: buses
