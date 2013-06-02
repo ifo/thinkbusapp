@@ -40,7 +40,9 @@ generateMessageFromBusCode = (busCode, info) ->
   msg = busCode + ' is scheduled for: ' + times
 
 generateMessageWithoutBusCode = (info) ->
-  msg = 'Sorry, not implemented yet! :('
+  for bus in info
+    nextBusArray.push
+  msg = 'Sorry, this feature is not fully implemented yet! :('
 
 # end helpers
 
@@ -68,6 +70,8 @@ exports.index = (req, res) ->
         msg = generateMessageWithoutBusCode busInfo
       res.render 'sms',
         message: msg
+  else
+    res.send "Sorry, you didn't send the right information :("
 
 exports.live = (req, res) ->
   # display all current texts in the database
