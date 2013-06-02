@@ -22,9 +22,18 @@ app.use express.static(path.join(__dirname, "public"))
 # development only
 app.use express.errorHandler()  if "development" is app.get("env")
 
+app.get "/", routes.index
 app.get "/sms", routes.sms
 app.post "/sms", routes.smsp
-app.get "/", routes.index
+
+# because the sms api is sent to /
+#app.get "/index", routes.index
+
+# route shout section
+app.get "/rs/agencies", routes.getAgencies
+app.get "/rs/stops", routes.getStops
+app.get "/rs/shout", routes.shout
+app.get "/rs/nextbus/:id?", routes.nextbus
 
 http.createServer(app).listen app.get("port"), ->
   console.log "Express server listening on port " + app.get("port")
