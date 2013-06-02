@@ -7,7 +7,7 @@ rsagency = 'paac'
 rsstop = 'P00750'
 
 createEntry = (PhoneID, OriginalText) ->
-  message = PhoneID + '\t' + OriginalText + '\t' + new Date + '\n'
+  message = PhoneID + '\t' + OriginalText + '\t' + new Date().getTime() + '\n'
   fs.appendFile 'textlog.txt', message, (err) ->
     if err
       0
