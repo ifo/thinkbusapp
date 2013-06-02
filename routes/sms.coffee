@@ -40,19 +40,25 @@ generateMessageFromBusCode = (busCode, info) ->
   msg = busCode + ' is scheduled for: ' + times
 
 generateMessageWithoutBusCode = (info) ->
+  bussn = []
+  nextBusArray = []
+  nbus = []
   for bus in info
-    nextBusArray.push
-  msg = 'Sorry, this feature is not fully implemented yet! :('
+    if !(bus.route_short_name in bussn) && bussn.length < 3
+      bussn.push bus.route_short_name
+      nextBusArray.push bus
+  for bus in nextBusArray
+    nbus.push bus.route_short_name + ' @ ' + bus.arrival_time
+  msg = nbus.reduce (x, y) -> x + ', ' + y
+  "The next buses are " + msg
 
 # end helpers
 
 exports.index = (req, res) ->
-  # get all message information (PhoneID, OriginalText)
-  # log message info
-  # parse original text
-  # respond with bus times
-  if req.query.PhoneID && req.query.OriginalText
-    pid = req.query.PhoneID
+  #console.log "entered index"
+  #console.log req.query
+  if req.query.PhoneId && req.query.OriginalText
+    pid = req.query.PhoneId
     ot = req.query.OriginalText
     # log it
     createEntry pid, ot
