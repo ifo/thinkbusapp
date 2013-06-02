@@ -55,8 +55,6 @@ generateMessageWithoutBusCode = (info) ->
 # end helpers
 
 exports.index = (req, res) ->
-  #console.log "entered index"
-  #console.log req.query
   if req.query.PhoneId && req.query.OriginalText
     pid = req.query.PhoneId
     ot = req.query.OriginalText
@@ -66,16 +64,12 @@ exports.index = (req, res) ->
     busCode = getBusCodeFromText(removeThinkBusFromText ot)
     # generate response
     getNextBusTimes (info) ->
-      #console.log info
       busInfo = info.response
-      #res.send JSON.stringify info
-    
       if busCode != 0
         msg = generateMessageFromBusCode busCode, busInfo
       else
         msg = generateMessageWithoutBusCode busInfo
-      res.render 'sms',
-        message: msg
+      res.send "<MsgmeKeywordResponse><Content><Message><![CDATA[#{msg}]]></Message></Content></MsgmeKeywordResponse>"
   else
     res.send "Sorry, you didn't send the right information :("
 
